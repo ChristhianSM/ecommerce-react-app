@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import {RiAddCircleLine} from 'react-icons/ri'
 import {BsDashCircle} from 'react-icons/bs'
 
-export const InputCount = () => {
+export const InputCount = ({stockProduct, initialAmount= 1}) => {
 
-    const stockProduct = 10
-    const [counter, setCounter] = useState(0);
+    const [counter, setCounter] = useState(initialAmount);
 
     const handleIncrementCounter = () => {
         if (counter < stockProduct ) {

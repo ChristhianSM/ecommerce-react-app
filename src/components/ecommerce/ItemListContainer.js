@@ -5,7 +5,10 @@ export const ItemListContainer = () => {
 
     return (
         <div className = "bg-gray-300 h-screen">
-            <InputCount />
+            <InputCount 
+                stockProduct = {10}
+                initialAmount = {5}
+            />
         </div>
     )
 }
