@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { InputCount } from './InputCount'
 
 export const ItemListContainer = () => {
+
     return (
-        <div>
-            Items
+        <div className = "bg-gray-300 h-screen">
+            <InputCount />
         </div>
     )
 }
