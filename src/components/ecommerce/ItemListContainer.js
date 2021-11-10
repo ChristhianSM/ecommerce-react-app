@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { InputCount } from './InputCount'
+import { ItemDetailContainer } from './ItemDetailContainer';
 import { ItemList } from './ItemList'
 
 export const ItemListContainer = () => {    
@@ -21,6 +22,8 @@ export const ItemListContainer = () => {
             <ItemList 
                 products = {products}
             />
+
+            <ItemDetailContainer />
             <InputCount 
                 stockProduct = {10}
                 initialAmount = {5}
