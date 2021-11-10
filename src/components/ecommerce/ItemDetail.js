@@ -25,7 +25,7 @@ export const ItemDetail = ({product}) => {
                                 <BiHeart className = "w-10 h-8 mx-auto text-purple-500"/>
                             </div>
                             <button className = "w-full text-white font-medium text-lg">
-                                Agregar al carrito
+                                Agregar al carrito de compras
                             </button>
                         </div>
                     </div>
