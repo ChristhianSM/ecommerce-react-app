@@ -18,21 +18,16 @@ export const InputCount = ({stockProduct, initialAmount= 1}) => {
     }
 
     return (
-        <div className = "bg-gray-400 w-52 text-center ">
-            <p className = "text-2xl mb-5">Laptop asus</p>
+        <div className = "w-52 mx-auto ">
             <div className = "flex items-center gap-2 justify-center mb-2">
-                <BsDashCircle 
-                    className = "text-xl cursor-pointer"
-                    onClick = {handleDrecementCounter}
-                ></BsDashCircle>
+                <button onClick = {handleDrecementCounter}>
+                    <BsDashCircle  className = "text-xl"></BsDashCircle>
+                </button>
                 <span> {counter} </span>
-                <RiAddCircleLine 
-                    className = "text-2xl cursor-pointer"
-                    onClick = {handleIncrementCounter}
-                ></RiAddCircleLine>
+                <button onClick = {handleIncrementCounter}>
+                    <RiAddCircleLine className = "text-2xl"></RiAddCircleLine>
+                </button>
             </div>
-
-            <button className = "my-2 rounded-md bg-blue-500 p-2">Agregar al carrito</button>
         </div>
     )
 }
