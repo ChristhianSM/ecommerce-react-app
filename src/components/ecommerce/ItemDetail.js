@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import {BiHeart} from 'react-icons/bi'
+import { useHistory } from 'react-router';
 import { InputCount } from './InputCount'
 import { SimilarProducts } from './SimilarProducts';
 
 export const ItemDetail = ({product}) => {
 
+    const history = useHistory();
     // statePara productos con la misma categoria
     const [similarProducts, setSimilarProducts] = useState([]);
+    const [amount, setAmount] = useState(1);
+    const [finishShop, setFinishShop] = useState(false);
 
     useEffect(() => {
         const getSimilarProducts = async() => {
@@ -15,8 +19,22 @@ export const ItemDetail = ({product}) => {
             setSimilarProducts(data)
         }
         getSimilarProducts();
-    }, [product.category])
+    }, [product.category]);
+
+    const handleAddProduct = () => {
+        const newProduct = {
+            ...product,
+            amount
+        }
+
+        setFinishShop(true);
+        console.log(newProduct);
+    }
     
+    const handleFinishShop = () => {
+        history.push("/cart")
+    }
+
     return (
         <section className = "mx-auto max-w-4xl container ">
                 <div className = "flex mt-10 gap-10 items-center">
@@ -35,19 +53,38 @@ export const ItemDetail = ({product}) => {
                             <p>S/. {product.price}</p>
                         </div>
 
-                        <div>
-                            <InputCount 
-                                stockProduct = {10}
-                            />
-                        </div>
+                        {
+                            !finishShop &&
+                            <div>
+                                <InputCount 
+                                    setAmount = {setAmount}
+                                    amount = {amount}
+                                    stockProduct = {10}
+                                />
+                            </div>
+                        }
 
                         <div className = "flex w-full bg-purple-500 rounded-lg border-purple-500 border-2 overflow-hidden">
                             <div className = "w-20 p-2 bg-white" >
                                 <BiHeart className = "w-10 h-8 mx-auto text-purple-500"/>
                             </div>
-                            <button className = "w-full text-white font-medium text-lg">
-                                Agregar al carrito de compras
-                            </button>
+                            {
+                               !finishShop ? 
+                                <button 
+                                    className = "w-full text-white font-medium text-lg"
+                                    onClick = {handleAddProduct}
+                                >
+                                    Agregar al carrito de compras
+                                </button>
+                                :
+                                <button 
+                                    className = "w-full text-white font-medium text-lg"
+                                    onClick = {handleFinishShop}
+                                >
+                                    Finalizar Compra
+                                </button>
+
+                            }
                         </div>
                     </div>
                 </div>
