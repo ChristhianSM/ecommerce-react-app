@@ -19,8 +19,8 @@ export const ItemDetail = ({product}) => {
     
     return (
         <section className = "mx-auto max-w-4xl container ">
-                <div className = "flex mt-10 gap-10">
-                    <div className = "w-1/2 h-96">
+                <div className = "flex mt-10 gap-10 items-center">
+                    <div className = "w-1/2">
                         <img src={product.image} alt="" className = "m-auto object-contain w-full h-full"/>
                     </div>
                     <div className = "w-1/2">

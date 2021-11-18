@@ -8,13 +8,11 @@ import { Register } from "./components/auth/Register";
 
 import { ItemDetailContainer } from "./components/ecommerce/ItemDetailContainer";
 import { ItemListContainer } from "./components/ecommerce/ItemListContainer";
-import { NavBar } from "./components/ui/NavBar";
 
 
 function App() {
   return (
     <Router>
-      {/* <NavBar /> */}
       <Switch>
         <Route exact path = "/register" component = {Register}/>
         <Route exact path = "/login" component = {Login}/>
