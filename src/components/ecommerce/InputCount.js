@@ -10,7 +10,7 @@ export const InputCount = ({stockProduct, setAmount, amount}) => {
         }
     }
     const handleDecrementCounter = () => {
-        if (amount > 0) {
+        if (amount > 1) {
             setAmount(amount-1)
         }
     }
@@ -30,7 +30,6 @@ export const InputCount = ({stockProduct, setAmount, amount}) => {
     return (
         <div className = "">
             <div className = "flex flex-col gap-2 justify-center mb-2">
-                <p>Stock {stockProduct}</p>
                 <div className = "relative">
                     <button 
                         className = "absolute text-2xl border border-black h-full px-2 bg-gray-400 rounded-tl-lg rounded-bl-lg"
@@ -47,7 +46,7 @@ export const InputCount = ({stockProduct, setAmount, amount}) => {
                         onBlur = {handleBlurInput}
                     />
                     <button 
-                        className = "absolute text-2xl border border-black h-full px-2 bg-gray-400 rounded-tr-lg rounded-br-lg"
+                        className = "absolute right-0 text-2xl border border-black h-full px-2 bg-gray-400 rounded-tr-lg rounded-br-lg"
                         onClick = {handleIncrementCounter}
                         > + </button>
                 </div>

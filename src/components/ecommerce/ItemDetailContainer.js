@@ -34,7 +34,7 @@ export const ItemDetailContainer = () => {
             }
             getItem();
         }
-    }, [id]);
+    }, [id, cartList]);
 
     return (
 

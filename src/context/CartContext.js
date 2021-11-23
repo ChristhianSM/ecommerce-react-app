@@ -12,7 +12,7 @@ const CartContextProvider = ({children}) => {
                 if (item.id === product.id) {
                     return {
                         ...item,
-                        amount: item.amount + product.amount
+                        amount: product.amount
                     }
                 }else{
                     return item

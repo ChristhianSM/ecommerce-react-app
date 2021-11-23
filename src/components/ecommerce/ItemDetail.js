@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 import {BiHeart} from 'react-icons/bi'
 import { useHistory } from 'react-router';
 import { CartContext } from '../../context/CartContext';
@@ -7,7 +8,7 @@ import { SimilarProducts } from './SimilarProducts';
 
 export const ItemDetail = ({product}) => {
     const history = useHistory();
-    const {addProduct} = useContext(CartContext);
+    const { addProduct} = useContext(CartContext);
 
     // statePara productos con la misma categoria
     const [similarProducts, setSimilarProducts] = useState([]);
@@ -22,6 +23,7 @@ export const ItemDetail = ({product}) => {
         }
         getSimilarProducts();
     }, [product.category]);
+
 
     const handleAddProduct = () => {
         const newProduct = {
@@ -54,7 +56,16 @@ export const ItemDetail = ({product}) => {
                             <p>Ahora</p>
                             <p>S/. {product.price}</p>
                         </div>
-
+                        {
+                            product.amount &&
+                            <p className = "bg-gray-800 text-white my-2 mt-5 text-center w-1/2 mx-auto py-2 flex justify-center items-center">
+                                En tu  
+                                <span className = "inline-block mx-2">
+                                    <AiOutlineShoppingCart></AiOutlineShoppingCart>
+                                </span>
+                                hay {product.amount} unidades
+                            </p>
+                        }
                         {
                             !finishShop &&
                             <div>
@@ -66,30 +77,34 @@ export const ItemDetail = ({product}) => {
                             </div>
                         }
 
-                        <div className = "flex w-full bg-purple-500 rounded-lg border-purple-500 border-2 overflow-hidden">
-                            {
-                               !finishShop ? 
-                               <>
-                                    <div className = "w-20 p-2 bg-white" >
-                                        <BiHeart className = "w-10 h-8 mx-auto text-purple-500"/>
-                                    </div>
-                                    <button 
-                                        className = "w-full text-white font-medium text-lg"
-                                        onClick = {handleAddProduct}
-                                    >
-                                        Agregar al carrito de compras
-                                    </button>
-                               </>
-                                :
+                        {
+                            !finishShop ?
+                            <div className = "flex w-full bg-purple-500 rounded-lg border-purple-500 border-2 overflow-hidden">
+                                <div className = "w-20 p-2 bg-white" >
+                                    <BiHeart className = "w-10 h-8 mx-auto text-purple-500"/>
+                                </div>
                                 <button 
                                     className = "w-full text-white font-medium text-lg"
-                                    onClick = {handleFinishShop}
+                                    onClick = {handleAddProduct}
                                 >
-                                    Finalizar Compra
+                                    Agregar al carrito de compras
                                 </button>
-
-                            }
-                        </div>
+                            </div>
+                            :
+                            <div className = "flex flex-col justify-center items-center animate__animated animate__slideInUp">
+                                <button 
+                                    className = "w-full text-white font-medium text-lg bg-purple-500 rounded-lg py-2"
+                                    onClick = {handleFinishShop}
+                                >Finalizar Compra
+                                </button>
+        
+                                <button 
+                                    className = "mt-4 bg-black text-white py-2 w-1/2"
+                                    onClick = { () => setFinishShop(false)}
+                                >Agregar mas</button>
+                            </div>
+                        }
+                
                     </div>
                 </div>
                 <div className = "border-t border-gray-300 mt-10">
