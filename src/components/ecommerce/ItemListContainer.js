@@ -18,12 +18,24 @@ export const ItemListContainer = () => {
             if (categoryId) {
                 const response = await fetch(`https://fakestoreapi.com/products/category/${categoryId}`);
                 const data = await response.json();
-                setProducts(data)
+                const arrayProducts = data.map(product => {
+                    return {
+                        ...product,
+                        stock: 15,
+                    }
+                })
+                setProducts(arrayProducts)
                 setLoading(false)
             }else{
                 const response = await fetch("https://fakestoreapi.com/products");
                 const data = await response.json();
-                setProducts(data)
+                const arrayProducts = data.map(product => {
+                    return {
+                        ...product,
+                        stock: 15,
+                    }
+                })
+                setProducts(arrayProducts)
                 setLoading(false)
             }
         }

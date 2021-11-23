@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {BiHeart} from 'react-icons/bi'
 import { useHistory } from 'react-router';
+import { CartContext } from '../../context/CartContext';
 import { InputCount } from './InputCount'
 import { SimilarProducts } from './SimilarProducts';
 
 export const ItemDetail = ({product}) => {
-
     const history = useHistory();
+    const {addProduct} = useContext(CartContext);
+
     // statePara productos con la misma categoria
     const [similarProducts, setSimilarProducts] = useState([]);
-    const [amount, setAmount] = useState(1);
+    const [amount, setAmount] = useState(product.amount || 1);
     const [finishShop, setFinishShop] = useState(false);
 
     useEffect(() => {
@@ -28,7 +30,7 @@ export const ItemDetail = ({product}) => {
         }
 
         setFinishShop(true);
-        console.log(newProduct);
+        addProduct(newProduct);
     }
     
     const handleFinishShop = () => {
@@ -59,23 +61,25 @@ export const ItemDetail = ({product}) => {
                                 <InputCount 
                                     setAmount = {setAmount}
                                     amount = {amount}
-                                    stockProduct = {10}
+                                    stockProduct = {product.stock}
                                 />
                             </div>
                         }
 
                         <div className = "flex w-full bg-purple-500 rounded-lg border-purple-500 border-2 overflow-hidden">
-                            <div className = "w-20 p-2 bg-white" >
-                                <BiHeart className = "w-10 h-8 mx-auto text-purple-500"/>
-                            </div>
                             {
                                !finishShop ? 
-                                <button 
-                                    className = "w-full text-white font-medium text-lg"
-                                    onClick = {handleAddProduct}
-                                >
-                                    Agregar al carrito de compras
-                                </button>
+                               <>
+                                    <div className = "w-20 p-2 bg-white" >
+                                        <BiHeart className = "w-10 h-8 mx-auto text-purple-500"/>
+                                    </div>
+                                    <button 
+                                        className = "w-full text-white font-medium text-lg"
+                                        onClick = {handleAddProduct}
+                                    >
+                                        Agregar al carrito de compras
+                                    </button>
+                               </>
                                 :
                                 <button 
                                     className = "w-full text-white font-medium text-lg"

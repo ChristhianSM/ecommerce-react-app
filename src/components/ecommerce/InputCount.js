@@ -1,34 +1,59 @@
-import React from 'react'
-import {RiAddCircleLine} from 'react-icons/ri'
-import {BsDashCircle} from 'react-icons/bs'
+import React, { useState } from 'react'
 
 export const InputCount = ({stockProduct, setAmount, amount}) => {
-
+    
+    const [isLimitStock, setIsLimitStock] = useState(false);
 
     const handleIncrementCounter = () => {
         if (amount < stockProduct ) {
             setAmount(amount + 1)
         }
     }
-    const handleDrecementCounter = () => {
+    const handleDecrementCounter = () => {
         if (amount > 0) {
             setAmount(amount-1)
         }
     }
 
+    const handleInputAmount = (e) => {
+        setAmount(e.target.value)
+    }
+
+    const handleBlurInput = (e) => {
+        if (parseInt(e.target.value) > stockProduct) {
+            setIsLimitStock(true); 
+            return
+        }
+        setIsLimitStock(false)
+    }
+
     return (
-        <div className = "w-52 mx-auto ">
-            <div className = "flex flex-col items-center gap-2 justify-center mb-2">
+        <div className = "">
+            <div className = "flex flex-col gap-2 justify-center mb-2">
                 <p>Stock {stockProduct}</p>
-                <div>
-                    <button onClick = {handleDrecementCounter}>
-                        <BsDashCircle  className = "text-xl"></BsDashCircle>
-                    </button>
-                    <span> {amount} </span>
-                    <button onClick = {handleIncrementCounter}>
-                        <RiAddCircleLine className = "text-2xl"></RiAddCircleLine>
-                    </button>
+                <div className = "relative">
+                    <button 
+                        className = "absolute text-2xl border border-black h-full px-2 bg-gray-400 rounded-tl-lg rounded-bl-lg"
+                        onClick = {handleDecrementCounter}
+                    > - </button>
+                    <input 
+                        type="text" 
+                        className = "border-2 w-full py-1 rounded-tl-lg outline-none text-black px-10 text-center"
+                        name = "amount"
+                        value = {amount}
+                        onChange = {(e) => {
+                            handleInputAmount(e)
+                        }}
+                        onBlur = {handleBlurInput}
+                    />
+                    <button 
+                        className = "absolute text-2xl border border-black h-full px-2 bg-gray-400 rounded-tr-lg rounded-br-lg"
+                        onClick = {handleIncrementCounter}
+                        > + </button>
                 </div>
+                {
+                    isLimitStock && <p>Solamente tenemos {stockProduct} unidades de este producto</p>
+                }
             </div>
         </div>
     )
